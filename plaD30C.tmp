@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://droie5ji1vf14"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_4j4ox"]
+[ext_resource type="PackedScene" uid="uid://bcvydsi4t8sef" path="res://bullet.tscn" id="2_lqgll"]
+[ext_resource type="Texture2D" uid="uid://ierm7dr171pp" path="res://player.png" id="3_fy2id"]
+[ext_resource type="Script" path="res://Muzzle.gd" id="11_fwgdp"]
+
+[sub_resource type="Animation" id="Animation_e65hq"]
+resource_name = "walk"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_b3m7r"]
+resource_name = "walk_attack"
+length = 0.5
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m0e0y"]
+_data = {
+"walk": SubResource("Animation_e65hq"),
+"walk_attack": SubResource("Animation_b3m7r")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t44sp"]
+size = Vector2(43, 155)
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(601, 300)
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_4j4ox")
+bullet_scene = ExtResource("2_lqgll")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(6, 2)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_fy2id")
+hframes = 3
+vframes = 2
+region_enabled = true
+region_rect = Rect2(0, 20, 1239, 812.303)
+
+[node name="Muzzle" type="Marker2D" parent="Sprite2D"]
+position = Vector2(120, -104)
+scale = Vector2(2, 2)
+script = ExtResource("11_fwgdp")
+metadata/_edit_group_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m0e0y")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.5, 10.5)
+shape = SubResource("RectangleShape2D_t44sp")

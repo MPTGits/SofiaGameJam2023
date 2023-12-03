@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bajeni0n0hki7"
+path="res://.godot/imported/UI attack 6.wav-ccead35730f1e7c420c4e01a2307b175.sample"
+
+[deps]
+
+source_file="res://sound/UI attack 6.wav"
+dest_files=["res://.godot/imported/UI attack 6.wav-ccead35730f1e7c420c4e01a2307b175.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

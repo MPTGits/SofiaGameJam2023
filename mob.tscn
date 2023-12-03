@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://dcyeoj7vkysf5"]
+
+[ext_resource type="Script" path="res://Mob.gd" id="1_hi5qk"]
+[ext_resource type="Texture2D" uid="uid://iuyrnv42xwh2" path="res://zombi_macka.png" id="2_sh2ga"]
+
+[sub_resource type="Animation" id="Animation_cxi4x"]
+resource_name = "walk_left"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 2,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e8385"]
+_data = {
+"walk_left": SubResource("Animation_cxi4x")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vbqbn"]
+radius = 27.1662
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pqrao"]
+size = Vector2(50.5, 154.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a4ubd"]
+size = Vector2(60.5, 19.5)
+
+[node name="Mob" type="CharacterBody2D"]
+script = ExtResource("1_hi5qk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(559, 391)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_sh2ga")
+hframes = 5
+region_enabled = true
+region_rect = Rect2(-3.882, -4.172, 2370.87, 594.209)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_e8385")
+}
+speed_scale = 0.8
+
+[node name="head" type="CollisionShape2D" parent="."]
+position = Vector2(557, 285)
+shape = SubResource("CircleShape2D_vbqbn")
+
+[node name="body" type="CollisionShape2D" parent="."]
+position = Vector2(561, 401)
+shape = SubResource("RectangleShape2D_pqrao")
+
+[node name="hands" type="CollisionShape2D" parent="."]
+position = Vector2(505.25, 319)
+shape = SubResource("RectangleShape2D_a4ubd")

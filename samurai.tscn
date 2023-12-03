@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://dvofw63fri3r1"]
+
+[ext_resource type="Script" path="res://samurai.gd" id="1_fc5pm"]
+[ext_resource type="Texture2D" uid="uid://g1nul8uwgwdm" path="res://samurai.png" id="1_sjwjg"]
+[ext_resource type="AudioStream" uid="uid://bk21kq3r7tt3e" path="res://sound/Samurai voice.wav" id="3_feamy"]
+[ext_resource type="AudioStream" uid="uid://dn2ao5j1mf0h4" path="res://sound/Samurai sword swoosh.wav" id="4_sanru"]
+
+[sub_resource type="Animation" id="Animation_mrqjq"]
+resource_name = "walk_left"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_84dvx"]
+_data = {
+"walk_left": SubResource("Animation_mrqjq")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o8rr6"]
+size = Vector2(90, 169.581)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ib2s1"]
+size = Vector2(74.0122, 1096.3)
+
+[node name="Samurai" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(0.4, 0.4)
+collision_mask = 0
+script = ExtResource("1_fc5pm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_sjwjg")
+hframes = 4
+frame = 3
+region_enabled = true
+region_rect = Rect2(0, 0, 1266.3, 560)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_84dvx")
+}
+
+[node name="body" type="CollisionShape2D" parent="." groups=["enemy"]]
+position = Vector2(-2.5, 20)
+scale = Vector2(0.872909, 1.29247)
+shape = SubResource("RectangleShape2D_o8rr6")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(2.5, -17.5)
+scale = Vector2(1.92536, 0.226394)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" groups=["enemy"]]
+position = Vector2(-1.29846, 165.641)
+scale = Vector2(0.897753, 1.22638)
+shape = SubResource("RectangleShape2D_ib2s1")
+
+[node name="hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_feamy")
+
+[node name="attack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_sanru")

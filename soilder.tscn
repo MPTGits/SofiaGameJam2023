@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=3 uid="uid://copq3lo7ms6sm"]
+
+[ext_resource type="Texture2D" uid="uid://ccdsyfcgd05bu" path="res://soilder.png" id="1_5eo6a"]
+[ext_resource type="Script" path="res://soilder.gd" id="1_smimu"]
+[ext_resource type="PackedScene" uid="uid://bcf7d0h0ad1u3" path="res://bullet_soilder.tscn" id="2_nydv2"]
+[ext_resource type="Script" path="res://Sprite2D.gd" id="3_7sff0"]
+[ext_resource type="Script" path="res://Marker2D.gd" id="5_ghtiv"]
+[ext_resource type="AudioStream" uid="uid://cdkbs2f0q04fk" path="res://sound/Army movement.wav" id="6_5u2hb"]
+
+[sub_resource type="Animation" id="Animation_cxi4x"]
+resource_name = "walk_left"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 2,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e8385"]
+_data = {
+"walk_left": SubResource("Animation_cxi4x")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0sqre"]
+radius = 23.5703
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fg3hf"]
+size = Vector2(31.5134, 93.5809)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7is1d"]
+size = Vector2(56.7708, 15.0417)
+
+[node name="Soilder" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_smimu")
+bullet_scene = ExtResource("2_nydv2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["enemy"]]
+texture_filter = 1
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_5eo6a")
+hframes = 4
+frame = 3
+region_enabled = true
+region_rect = Rect2(5.023, 8.296, 2500.42, 532.404)
+script = ExtResource("3_7sff0")
+
+[node name="Marker2D" type="Marker2D" parent="Sprite2D"]
+position = Vector2(-305.556, -61.1111)
+script = ExtResource("5_ghtiv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_e8385")
+}
+speed_scale = 0.8
+
+[node name="head" type="CollisionShape2D" parent="."]
+position = Vector2(32, -50)
+shape = SubResource("CircleShape2D_0sqre")
+metadata/_edit_group_ = true
+
+[node name="body" type="CollisionShape2D" parent="."]
+position = Vector2(47, 16)
+scale = Vector2(1.2191, 0.961734)
+shape = SubResource("RectangleShape2D_fg3hf")
+
+[node name="hands" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -23)
+shape = SubResource("RectangleShape2D_7is1d")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="move" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_5u2hb")
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

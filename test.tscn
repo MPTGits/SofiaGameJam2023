@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2rmkt22c4db6"]
+
+[ext_resource type="PackedScene" uid="uid://droie5ji1vf14" path="res://player.tscn" id="1_i2q1l"]
+[ext_resource type="PackedScene" uid="uid://copq3lo7ms6sm" path="res://soilder.tscn" id="2_he8yw"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_i2q1l")]
+position = Vector2(0, 0)
+scale = Vector2(1.2, 1.2)
+
+[node name="Soilder" parent="." instance=ExtResource("2_he8yw")]
+position = Vector2(178, 41)

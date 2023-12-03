@@ -1,103 +1,117 @@
-[gd_scene load_steps=14 format=3 uid="uid://droie5ji1vf14"]
+[gd_scene load_steps=16 format=3 uid="uid://droie5ji1vf14"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_4j4ox"]
-[ext_resource type="Texture2D" uid="uid://chnu4cqa7tvlv" path="res://idle0.png" id="2_425v4"]
 [ext_resource type="PackedScene" uid="uid://bcvydsi4t8sef" path="res://bullet.tscn" id="2_lqgll"]
-[ext_resource type="Texture2D" uid="uid://cgne6ax4bvnh1" path="res://idle1.png" id="3_otmhu"]
-[ext_resource type="Texture2D" uid="uid://bd65t6uwp8tay" path="res://idle2.png" id="4_d7tys"]
-[ext_resource type="Texture2D" uid="uid://4hb2cd5idsca" path="res://idle3.png" id="5_m1avv"]
-[ext_resource type="Texture2D" uid="uid://dvk1hbm2vygg1" path="res://idle4.png" id="6_fqb5u"]
-[ext_resource type="Texture2D" uid="uid://dcm8f6tchevjo" path="res://idle5.png" id="7_fif5x"]
-[ext_resource type="Texture2D" uid="uid://bva8bippaha8l" path="res://idle6.png" id="8_h1ynq"]
-[ext_resource type="Texture2D" uid="uid://bgmkb5whg1i5k" path="res://idle7.png" id="9_3d6on"]
+[ext_resource type="Texture2D" uid="uid://ierm7dr171pp" path="res://player.png" id="3_fy2id"]
+[ext_resource type="PackedScene" uid="uid://cndwro51chf7p" path="res://health_bar.tscn" id="5_mdcpe"]
+[ext_resource type="AudioStream" uid="uid://drb4prkdvn0mo" path="res://sound/UI attack 5.wav" id="6_n6ceo"]
+[ext_resource type="AudioStream" uid="uid://bajeni0n0hki7" path="res://sound/UI attack 6.wav" id="7_4t22e"]
+[ext_resource type="AudioStream" uid="uid://dxmmcu02tqatv" path="res://sound/AI voice huh whats happening.wav" id="8_pphq5"]
+[ext_resource type="AudioStream" uid="uid://d3508bf3v8gaq" path="res://sound/AI voice stop this no reason.wav" id="9_k0yee"]
 [ext_resource type="Script" path="res://Muzzle.gd" id="11_fwgdp"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_tch6e"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("8_h1ynq")
-}],
-"loop": true,
-"name": &"idle0",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("9_3d6on")
-}],
-"loop": true,
-"name": &"idle1",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_425v4")
-}],
-"loop": true,
-"name": &"idle2",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_otmhu")
-}],
-"loop": true,
-"name": &"idle3",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_d7tys")
-}],
-"loop": true,
-"name": &"idle4",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_m1avv")
-}],
-"loop": true,
-"name": &"idle5",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_fqb5u")
-}],
-"loop": true,
-"name": &"idle6",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_fif5x")
-}],
-"loop": true,
-"name": &"idle7",
-"speed": 5.0
-}]
+[sub_resource type="Animation" id="Animation_0x7wc"]
+resource_name = "idle"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_e65hq"]
+resource_name = "walk"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_b3m7r"]
+resource_name = "walk_attack"
+length = 0.5
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m0e0y"]
+_data = {
+"idle": SubResource("Animation_0x7wc"),
+"walk": SubResource("Animation_e65hq"),
+"walk_attack": SubResource("Animation_b3m7r")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t44sp"]
-size = Vector2(65, 88)
+size = Vector2(40, 141.667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gigiv"]
+size = Vector2(53.3333, 155)
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(584, 315)
+scale = Vector2(0.6, 0.6)
 script = ExtResource("1_4j4ox")
 bullet_scene = ExtResource("2_lqgll")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(6, 2.58333)
+scale = Vector2(0.5, 0.497126)
+texture = ExtResource("3_fy2id")
+hframes = 3
+vframes = 2
+region_enabled = true
+region_rect = Rect2(0, 20, 1239, 812.303)
+
+[node name="Muzzle" type="Marker2D" parent="Sprite2D"]
+position = Vector2(120, -104)
+scale = Vector2(2, 2)
+script = ExtResource("11_fwgdp")
 metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_tch6e")
-animation = &"idle0"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m0e0y")
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -1)
+position = Vector2(5, 2.5)
 shape = SubResource("RectangleShape2D_t44sp")
 
-[node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(30, 0)
-script = ExtResource("11_fwgdp")
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="HealthBar" parent="." groups=["health"] instance=ExtResource("5_mdcpe")]
+position = Vector2(6.66667, -110)
+scale = Vector2(0.075, 0.075)
+
+[node name="hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(3.33333, 0.833335)
+shape = SubResource("RectangleShape2D_gigiv")
+
+[node name="attack1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_n6ceo")
+
+[node name="attack2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_4t22e")
+
+[node name="hurt1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_pphq5")
+
+[node name="hurt2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_k0yee")
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]

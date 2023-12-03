@@ -1,0 +1,83 @@
+[gd_scene load_steps=12 format=3 uid="uid://c44wbt74vf86c"]
+
+[ext_resource type="Script" path="res://bull.gd" id="1_qfqii"]
+[ext_resource type="Texture2D" uid="uid://5vta8lqg3wqe" path="res://bull.png" id="2_jbh3y"]
+[ext_resource type="Script" path="res://Sprite2D.gd" id="2_ox2go"]
+[ext_resource type="AudioStream" uid="uid://bhq8ctep2thcr" path="res://sound/Bull gallop.wav" id="4_vpy5g"]
+[ext_resource type="Script" path="res://AudioStreamPlayer.gd" id="6_4cdax"]
+
+[sub_resource type="Animation" id="Animation_udnw5"]
+resource_name = "walk_left"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 5, 1, 0, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dtbow"]
+_data = {
+"walk_left": SubResource("Animation_udnw5")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o4srw"]
+radius = 12.1655
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2a5vy"]
+size = Vector2(23, 71)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w4goy"]
+size = Vector2(19.5, 33.2487)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d0tgf"]
+size = Vector2(16.0091, 15.9908)
+
+[node name="Bull" type="CharacterBody2D"]
+scale = Vector2(1.6, 1.6)
+script = ExtResource("1_qfqii")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2, 11)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_jbh3y")
+hframes = 3
+vframes = 2
+frame = 4
+region_enabled = true
+region_rect = Rect2(5.023, 8.296, 1229.56, 829.209)
+script = ExtResource("2_ox2go")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dtbow")
+}
+
+[node name="head" type="CollisionShape2D" parent="."]
+position = Vector2(-5, -21)
+shape = SubResource("CircleShape2D_o4srw")
+
+[node name="body" type="CollisionShape2D" parent="."]
+position = Vector2(4, 21)
+shape = SubResource("RectangleShape2D_2a5vy")
+
+[node name="hand1" type="CollisionShape2D" parent="."]
+position = Vector2(25.1477, 2.36008)
+rotation = -0.452637
+shape = SubResource("RectangleShape2D_w4goy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-14.0076, -4.00762)
+rotation = 3.14007
+shape = SubResource("RectangleShape2D_d0tgf")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_vpy5g")
+script = ExtResource("6_4cdax")

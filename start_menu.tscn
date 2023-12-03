@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8tgpchpl3r2m"]
+
+[ext_resource type="Script" path="res://start_menu.gd" id="1_04rih"]
+[ext_resource type="Texture2D" uid="uid://dq1ktrutd72gg" path="res://OpeningScreen.png" id="1_c43fn"]
+[ext_resource type="Texture2D" uid="uid://cxkdp1u1ejl10" path="res://start.png" id="2_mguwr"]
+[ext_resource type="AudioStream" uid="uid://r6lf8w3tlh41" path="res://sound/Intro.wav" id="4_xya6b"]
+
+[node name="StartMenu" type="Node2D"]
+script = ExtResource("1_04rih")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1016.83, 539)
+scale = Vector2(1.76939, 1.66975)
+texture = ExtResource("1_c43fn")
+
+[node name="Start" type="TextureButton" parent="."]
+offset_left = 722.0
+offset_top = -308.0
+offset_right = 3857.0
+offset_bottom = 3051.0
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("2_mguwr")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_xya6b")
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

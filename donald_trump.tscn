@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwdj60nwfn7o7"]
+
+[ext_resource type="Texture2D" uid="uid://nldpu58cik4y" path="res://trump.png" id="1_ifovu"]
+[ext_resource type="Script" path="res://donald_trump.gd" id="1_ketn2"]
+[ext_resource type="AudioStream" uid="uid://cg1i1mg4ylc5o" path="res://sound/Trump we have losers.wav" id="3_8q3dr"]
+[ext_resource type="AudioStream" uid="uid://c3spgq01fte2r" path="res://sound/Trump i'm really rich.wav" id="4_6arlx"]
+
+[sub_resource type="Animation" id="Animation_sq1mc"]
+resource_name = "static"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iq7e0"]
+_data = {
+"static": SubResource("Animation_sq1mc")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgrju"]
+size = Vector2(125, 166)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_glvks"]
+size = Vector2(448.999, 57.5125)
+
+[node name="DonaldTrump" type="CharacterBody2D"]
+script = ExtResource("1_ketn2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["speed"]]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_ifovu")
+hframes = 3
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_iq7e0")
+}
+
+[node name="body" type="CollisionShape2D" parent="."]
+position = Vector2(-3.5, 33)
+shape = SubResource("RectangleShape2D_kgrju")
+
+[node name="Hitbox" type="Area2D" parent="." groups=["enemy"]]
+position = Vector2(-3, -52)
+scale = Vector2(1.16229, 1.19554)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0.860368, 66.9152)
+rotation = -3.14159
+scale = Vector2(0.394736, -2.57442)
+shape = SubResource("RectangleShape2D_glvks")
+
+[node name="hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8q3dr")
+
+[node name="static" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6arlx")
