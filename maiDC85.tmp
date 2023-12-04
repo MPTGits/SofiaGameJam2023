@@ -544,15 +544,6 @@ shape = SubResource("RectangleShape2D_v3ntr")
 position = Vector2(727, 1759)
 shape = SubResource("RectangleShape2D_n5nxs")
 
-[node name="Server1" parent="." instance=ExtResource("5_xx7uk")]
-position = Vector2(-260, -168)
-
-[node name="Server2" parent="." instance=ExtResource("5_xx7uk")]
-position = Vector2(714, -130)
-
-[node name="Server3" parent="." instance=ExtResource("5_xx7uk")]
-position = Vector2(240, 489)
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(239, 137)
 scale = Vector2(0.6, 0.6)
@@ -572,11 +563,19 @@ scale = Vector2(5, 5)
 text = "https://rb.gy/4xawwu"
 
 [node name="session" type="Label" parent="Camera2D"]
-offset_left = -1545.0
-offset_top = -850.0
-offset_right = -1377.0
-offset_bottom = -792.0
-scale = Vector2(5, 5)
+offset_left = -736.667
+offset_top = -491.667
+offset_right = -568.667
+offset_bottom = -433.667
+
+[node name="Server1" parent="." instance=ExtResource("5_xx7uk")]
+position = Vector2(-260, -168)
+
+[node name="Server2" parent="." instance=ExtResource("5_xx7uk")]
+position = Vector2(714, -130)
+
+[node name="Server3" parent="." instance=ExtResource("5_xx7uk")]
+position = Vector2(240, 489)
 
 [node name="Battle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_17sng")

@@ -10,4 +10,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	frame = 6 - health / 10
+	frame = 6 - health / 100
+	if Input.is_action_just_pressed("H"):
+		health = 200

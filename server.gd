@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const label_dmg : PackedScene = preload("res://damage_label.tscn")
 
-var health = 60
+var health = 40
 var is_broken = false
 
 # Called when the node enters the scene tree for the first time.

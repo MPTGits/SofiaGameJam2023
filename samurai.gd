@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 var dmg = 6
-var original_speed = 2
-var speed = 2
+var original_speed = 2.5
+var speed = 2.5
 var target
 var positive_sign = true
 var health = 2
